@@ -50,9 +50,19 @@ class MyAppState extends ChangeNotifier {
 
 // ...
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  var selectedIndex = 0;     // ← Add this property.
+
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       body: Row(
         children: [
@@ -69,9 +79,12 @@ class MyHomePage extends StatelessWidget {
                   label: Text('Favorites'),
                 ),
               ],
-              selectedIndex: 0,
+              selectedIndex: selectedIndex,
               onDestinationSelected: (value) {
-                print('selected: $value');
+                // ↓ Replace print with this.
+                setState(() {
+                  selectedIndex = value;
+                });
               },
             ),
           ),
